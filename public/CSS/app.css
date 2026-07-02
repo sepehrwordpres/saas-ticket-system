@@ -1,0 +1,18 @@
+@import url('https://fonts.googleapis.com/css2?family=Vazirmatn:wght@300;400;700&display=swap');
+
+body {
+    font-family: 'Vazirmatn', sans-serif;
+    background: linear-gradient(135deg, #0f172a 0%, #1e1b4b 100%);
+}
+
+/* افکت شیشه‌ای مدرن برای کارت‌ها */
+.glass-card {
+    background: rgba(30, 41, 59, 0.7);
+    backdrop-filter: blur(12px);
+    border: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+/* افکت نئون برای المان‌های وضعیت */
+.neon-glow-blue {
+    box-shadow: 0 0 15px rgba(59, 130, 246, 0.5);
+}
