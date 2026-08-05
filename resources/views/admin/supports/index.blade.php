@@ -2,11 +2,11 @@
     <div class="max-w-4xl mx-auto py-12 px-6">
         <div class="flex justify-between items-center mb-8">
             <div>
-                <h2 class="text-sm font-bold text-white">مدیریت کارشناسان پشتیبانی</h2>
-                <p class="text-[11px] text-slate-400 mt-1">لیست کارشناسان فعال که دسترسی پاسخگویی به تیکت‌ها را دارند.</p>
+                <h2 class="text-sm font-bold text-white">{{ __('supports.title') }}</h2>
+                <p class="text-[11px] text-slate-400 mt-1">{{ __('supports.subtitle') }}</p>
             </div>
             <a href="{{ route('admin.supports.create') }}" class="px-4 py-2 bg-white text-slate-950 font-semibold text-xs rounded-lg hover:bg-slate-200 transition-all">
-                + کارشناس جدید
+                {{ __('supports.add_new') }}
             </a>
         </div>
 
@@ -20,10 +20,11 @@
             <table class="w-full text-right border-collapse">
                 <thead>
                     <tr class="border-b border-slate-800 bg-slate-900/80 text-[11px] font-medium text-slate-400">
-                        <th class="p-4">نام کارشناس</th>
-                        <th class="p-4">آدرس ایمیل</th>
-                        <th class="p-4 text-left">تاریخ عضویت</th>
-                        <th class="p-4 text-center">عملیات</th> </tr>
+                        <th class="p-4">{{ __('supports.name') }}</th>
+                        <th class="p-4">{{ __('supports.email') }}</th>
+                        <th class="p-4 text-left">{{ __('supports.created_at') }}</th>
+                        <th class="p-4 text-center">{{ __('supports.actions') }}</th>
+                    </tr>
                 </thead>
                 <tbody class="divide-y divide-slate-800/60 text-xs text-slate-300">
                     @forelse($supports as $support)
@@ -37,16 +38,16 @@
                                 <div class="flex items-center justify-center gap-2">
                                     <a href="{{ route('admin.supports.edit', $support->id) }}" 
                                        class="px-2.5 py-1 bg-amber-500/10 border border-amber-500/20 text-amber-400 rounded-md hover:bg-amber-500 hover:text-slate-950 transition-all text-[11px] font-medium">
-                                        ویرایش
+                                        {{ __('supports.edit') }}
                                     </a>
                                     
                                     <form action="{{ route('admin.supports.destroy', $support->id) }}" method="POST" 
-                                          onsubmit="return confirm('آیا از حذف این کارشناس و سلب دسترسی‌های او مطمئن هستید؟');" class="inline">
+                                          onsubmit="return confirm('{{ __('supports.delete_confirm') }}');" class="inline">
                                         @csrf
                                         @method('DELETE')
                                         <button type="submit" 
                                                 class="px-2.5 py-1 bg-rose-500/10 border border-rose-500/20 text-rose-400 rounded-md hover:bg-rose-500 hover:text-white transition-all text-[11px] font-medium cursor-pointer">
-                                            حذف
+                                            {{ __('supports.delete') }}
                                         </button>
                                     </form>
                                 </div>
@@ -54,7 +55,8 @@
                         </tr>
                     @empty
                         <tr>
-                            <td colspan="4" class="p-8 text-center text-slate-500 text-xs"> هیچ کارشناس پشتیبانی تا این لحظه در سیستم تعریف نشده است.
+                            <td colspan="4" class="p-8 text-center text-slate-500 text-xs">
+                                {{ __('supports.no_supports') }}
                             </td>
                         </tr>
                     @endforelse

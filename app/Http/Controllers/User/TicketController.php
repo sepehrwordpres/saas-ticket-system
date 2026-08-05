@@ -10,15 +10,49 @@ use Illuminate\Http\Request;
 class TicketController extends Controller
 {
     // ۱. نمایش لیست تیکت‌های انحصاری خودِ کاربر لاگین‌شده
-    public function index()
-    {
-        $tickets = Ticket::where('user_id', auth()->id()) // 💡 کاملاً داینامیک بر اساس کاربر آنلاین
-                         ->with('department')
-                         ->latest()
-                         ->get();
+   // ۱. نمایش لیست تیکت‌های کاربر با فیلترهای پیشرفته
+public function index(Request $request)
+{
+    $tickets = Ticket::where('user_id', auth()->id())
+        ->with('department')
 
-        return view('user.tickets.index', compact('tickets'));
-    }
+        // 🔍 جستجو در عنوان و توضیحات
+        ->when($request->search, function ($query, $search) {
+            $query->where(function ($q) use ($search) {
+                $q->where('title', 'like', "%{$search}%")
+                  ->orWhere('description', 'like', "%{$search}%");
+            });
+        })
+
+        // 📌 فیلتر وضعیت
+        ->when($request->status, function ($query, $status) {
+            $query->where('status', $status);
+        })
+
+        // 🔥 فیلتر اولویت
+        ->when($request->priority, function ($query, $priority) {
+            $query->where('priority', $priority);
+        })
+
+        // 🏢 فیلتر دپارتمان
+        ->when($request->department_id, function ($query, $department) {
+            $query->where('department_id', $department);
+        })
+
+        ->latest()
+        ->paginate(10)
+        ->withQueryString();
+
+
+    // برای ساخت Select دپارتمان‌ها
+    $departments = Department::all();
+
+
+    return view('user.tickets.index', compact(
+        'tickets',
+        'departments'
+    ));
+}
 
     // ۲. نمایش فرم ساخت تیکت جدید (لود کردن دپارتمان‌ها)
     public function create()
@@ -115,3 +149,32 @@ class TicketController extends Controller
         return redirect()->back()->with('success', 'پاسخ شما با موفقیت ارسال شد.');
     }
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

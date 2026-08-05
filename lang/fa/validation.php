@@ -1,0 +1,87 @@
+<?php
+
+return [
+
+    'accepted' => ':attribute باید پذیرفته شود.',
+    'active_url' => ':attribute آدرس معتبر نیست.',
+    'after' => ':attribute باید تاریخی بعد از :date باشد.',
+    'after_or_equal' => ':attribute باید تاریخی برابر یا بعد از :date باشد.',
+    'alpha' => ':attribute فقط می‌تواند شامل حروف باشد.',
+    'alpha_dash' => ':attribute فقط می‌تواند شامل حروف، اعداد، خط تیره و زیرخط باشد.',
+    'alpha_num' => ':attribute فقط می‌تواند شامل حروف و اعداد باشد.',
+    'array' => ':attribute باید آرایه باشد.',
+    'before' => ':attribute باید تاریخی قبل از :date باشد.',
+    'before_or_equal' => ':attribute باید تاریخی برابر یا قبل از :date باشد.',
+    'between' => [
+        'array' => ':attribute باید بین :min و :max آیتم داشته باشد.',
+        'file' => 'حجم فایل :attribute باید بین :min و :max کیلوبایت باشد.',
+        'numeric' => ':attribute باید بین :min و :max باشد.',
+        'string' => ':attribute باید بین :min و :max کاراکتر باشد.',
+    ],
+    'boolean' => 'فیلد :attribute باید درست یا غلط باشد.',
+    'confirmed' => 'تأییدیه :attribute مطابقت ندارد.',
+    'date' => ':attribute تاریخ معتبر نیست.',
+    'date_equals' => ':attribute باید برابر با :date باشد.',
+    'date_format' => ':attribute با فرمت :format مطابقت ندارد.',
+    'different' => ':attribute و :other باید متفاوت باشند.',
+    'digits' => ':attribute باید :digits رقم باشد.',
+    'digits_between' => ':attribute باید بین :min و :max رقم باشد.',
+    'email' => 'فرمت ایمیل :attribute صحیح نیست.',
+    'exists' => ':attribute انتخاب شده معتبر نیست.',
+    'file' => ':attribute باید فایل باشد.',
+    'filled' => 'وارد کردن :attribute الزامی است.',
+    'gt' => [
+        'numeric' => ':attribute باید بزرگ‌تر از :value باشد.',
+        'string' => ':attribute باید بیشتر از :value کاراکتر باشد.',
+    ],
+    'image' => ':attribute باید تصویر باشد.',
+    'in' => ':attribute انتخاب شده معتبر نیست.',
+    'integer' => ':attribute باید عدد صحیح باشد.',
+    'ip' => ':attribute باید آدرس IP معتبر باشد.',
+    'json' => ':attribute باید JSON معتبر باشد.',
+    'max' => [
+        'file' => 'حجم :attribute نباید بیشتر از :max کیلوبایت باشد.',
+        'numeric' => ':attribute نمی‌تواند بیشتر از :max باشد.',
+        'string' => ':attribute نمی‌تواند بیشتر از :max کاراکتر باشد.',
+    ],
+    'mimes' => ':attribute باید یکی از فرمت‌های :values باشد.',
+    'min' => [
+        'file' => 'حجم :attribute باید حداقل :min کیلوبایت باشد.',
+        'numeric' => ':attribute باید حداقل :min باشد.',
+        'string' => ':attribute باید حداقل :min کاراکتر باشد.',
+    ],
+    'not_in' => ':attribute انتخاب شده معتبر نیست.',
+    'nullable' => '',
+    'numeric' => ':attribute باید عدد باشد.',
+    'password' => 'رمز عبور اشتباه است.',
+    'regex' => 'فرمت :attribute صحیح نیست.',
+    'required' => 'وارد کردن :attribute الزامی است.',
+    'same' => ':attribute و :other باید یکسان باشند.',
+    'size' => [
+        'file' => 'حجم :attribute باید :size کیلوبایت باشد.',
+        'numeric' => ':attribute باید برابر :size باشد.',
+        'string' => ':attribute باید :size کاراکتر باشد.',
+    ],
+    'string' => ':attribute باید متن باشد.',
+    'unique' => ':attribute قبلاً ثبت شده است.',
+    'uploaded' => 'آپلود :attribute ناموفق بود.',
+    'url' => 'فرمت :attribute معتبر نیست.',
+
+    'attributes' => [
+
+        'name' => 'نام',
+        'email' => 'ایمیل',
+        'password' => 'رمز عبور',
+        'password_confirmation' => 'تأیید رمز عبور',
+
+        'title' => 'عنوان',
+        'description' => 'توضیحات',
+        'department_id' => 'دپارتمان',
+        'priority' => 'اولویت',
+        'status' => 'وضعیت',
+        'message' => 'پیام',
+        'attachment' => 'فایل پیوست',
+
+    ],
+
+];

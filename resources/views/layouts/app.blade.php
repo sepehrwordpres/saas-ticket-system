@@ -1,13 +1,12 @@
 <!DOCTYPE html>
 {{-- 💡 اضافه کردن کلاس dark برای فعال شدن تم تاریک و جذاب گلاسمورفیسم روی کل قالب --}}
-<html lang="{{ str_replace('_', '-', app()->getLocale()) }}" dir="rtl" class="dark">
+<html lang="{{ str_replace('_', '-', app()->getLocale()) }}" dir="{{ app()->getLocale() === 'fa' ? 'rtl' : 'ltr' }}" class="dark">
     <head>
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <meta name="csrf-token" content="{{ csrf_token() }}">
 
-        <title>{{ config('app.name', 'Laravel') }}</title>
-
+<title>{{ __('app.name') }}</title>
         <link rel="preconnect" href="https://fonts.bunny.net">
         <link href="https://fonts.bunny.net/css?family=figtree:400,500,600&display=swap" rel="stylesheet" />
 

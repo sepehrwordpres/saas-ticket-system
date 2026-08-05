@@ -1,0 +1,48 @@
+Folder PATH listing
+Volume serial number is 0000021F AA9E:860C
+C:\USERS\SEPEHR\HERD\SAAS-TICKET-SYSTEM\APP\HTTP
++---Controllers
+|   |   Controller.php
+|   |   LanguageController.php
+|   |   ProfileController.php
+|   |   WelcomeController.php
+|   |   
+|   +---Admin
+|   |       DepartmentController.php
+|   |       SupportManagementController.php
+|   |       TicketController.php
+|   |       
+|   +---Auth
+|   |       AuthenticatedSessionController.php
+|   |       ConfirmablePasswordController.php
+|   |       EmailVerificationNotificationController.php
+|   |       EmailVerificationPromptController.php
+|   |       NewPasswordController.php
+|   |       PasswordController.php
+|   |       PasswordResetLinkController.php
+|   |       RegisteredUserController.php
+|   |       VerifyEmailController.php
+|   |       
+|   \---User
+|           DashboardController.php
+|           TicketController.php
+|           
++---Middleware
+|       AdminAccess.php
+|       SetLocale.php
+|       
+\---Requests
+    |   ProfileUpdateRequest.php
+    |   
+    \---Auth
+            LoginRequest.php
+            
+Folder PATH listing
+Volume serial number is 00000186 AA9E:860C
+C:\USERS\SEPEHR\HERD\SAAS-TICKET-SYSTEM\ROUTES
+    auth.php
+    console.php
+    web.php
+    
+No subfolders exist 
+

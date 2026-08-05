@@ -4,16 +4,14 @@
             <div>
                 <h2 class="font-bold text-xl bg-gradient-to-r from-indigo-400 to-cyan-400 bg-clip-text text-transparent leading-tight">
                     @if(Auth::user()->role === 'admin' || Auth::user()->is_admin)
-                        میز کار مدیریت سیستم تیکتینگ 🛠️
-                    @else
-                        میز کار من خوش آمدید 👋
-                    @endif
+{{ __('dashboard.admin_title') }}                    @else
+{{ __('dashboard.user_title') }}                    @endif
                 </h2>
                 <p class="text-xs text-slate-400 mt-1">
                     @if(Auth::user()->role === 'admin' || Auth::user()->is_admin)
-                        گزارش لحظه‌ای و مدیریت تیکت‌های کل کاربران سیستم
+{{ __('dashboard.admin_description') }}                        
                     @else
-                        خلاصه وضعیت سرویس‌ها و درخواست‌های پشتیبانی شما
+{{ __('dashboard.user_description') }}                        
                     @endif
                 </p>
             </div>
@@ -22,7 +20,7 @@
             @if(!(Auth::user()->role === 'admin' || Auth::user()->is_admin))
                 <a href="{{ route('user.tickets.create') }}" class="inline-flex items-center justify-center gap-2 bg-gradient-to-r from-blue-500 to-indigo-600 hover:from-blue-600 hover:to-indigo-700 text-white font-bold text-sm px-5 py-3 rounded-xl shadow-lg shadow-indigo-500/20 transition-all hover:-translate-y-0.5">
                     <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M12 4v16m8-8H4"/></svg>
-                    ثبت درخواست پشتیبانی جدید
+{{ __('dashboard.create_ticket') }}                    
                 </a>
             @endif
         </div>
@@ -36,7 +34,7 @@
             <div class="glass-card rounded-2xl p-6 flex items-center justify-between shadow-xl relative overflow-hidden group">
                 <div class="absolute -right-4 -bottom-4 w-24 h-24 bg-blue-500/10 rounded-full blur-xl group-hover:bg-blue-500/20 transition-all"></div>
                 <div class="space-y-2">
-                    <span class="text-xs font-medium text-slate-400 block">تیکت‌های در جریان</span>
+                    <span class="text-xs font-medium text-slate-400 block"> {{ __('dashboard.active_tickets') }}</span>
                     <span class="text-3xl font-black text-blue-400 font-mono">{{ $activeTickets }}</span>
                 </div>
                 <div class="p-3 rounded-xl bg-blue-500/10 text-blue-400 border border-blue-500/20">
@@ -47,7 +45,7 @@
             <div class="glass-card rounded-2xl p-6 flex items-center justify-between shadow-xl relative overflow-hidden group">
                 <div class="absolute -right-4 -bottom-4 w-24 h-24 bg-emerald-500/10 rounded-full blur-xl group-hover:bg-emerald-500/20 transition-all"></div>
                 <div class="space-y-2">
-                    <span class="text-xs font-medium text-slate-400 block">پاسخ‌های داده شده</span>
+                    <span class="text-xs font-medium text-slate-400 block"> {{ __('dashboard.answered_tickets') }} </span>
                     <span class="text-3xl font-black text-emerald-400 font-mono">{{ $answeredTickets }}</span>
                 </div>
                 <div class="p-3 rounded-xl bg-emerald-500/10 text-emerald-400 border border-emerald-500/20">
@@ -58,7 +56,7 @@
             <div class="glass-card rounded-2xl p-6 flex items-center justify-between shadow-xl relative overflow-hidden group sm:col-span-2 lg:col-span-1">
                 <div class="absolute -right-4 -bottom-4 w-24 h-24 bg-purple-500/10 rounded-full blur-xl group-hover:bg-purple-500/20 transition-all"></div>
                 <div class="space-y-2">
-                    <span class="text-xs font-medium text-slate-400 block">مجموع کل تیکت‌ها</span>
+                    <span class="text-xs font-medium text-slate-400 block"> {{ __('dashboard.total_tickets') }} </span>
                     <span class="text-3xl font-black text-purple-400 font-mono">{{ $totalTickets }}</span>
                 </div>
                 <div class="p-3 rounded-xl bg-purple-500/10 text-purple-400 border border-purple-500/20">
@@ -73,16 +71,16 @@
             <div class="p-5 border-b border-slate-800 bg-slate-900/30 flex items-center justify-between">
                 <h3 class="text-sm font-bold text-slate-200 flex items-center gap-2">
                     <span class="w-2 h-2 rounded-full bg-indigo-500 shadow-[0_0_8px_#6366f1]"></span>
-                    آخرین وضعیت تیکت‌های پشتیبانی
+{{ __('dashboard.latest_tickets') }}                    
                 </h3>
                 
                 @if(Auth::user()->role === 'admin' || Auth::user()->is_admin)
                     <a href="{{ route('admin.tickets.index') }}" class="text-xs text-indigo-400 hover:text-indigo-300 font-semibold transition-colors">
-                        مدیریت کل تیکت‌ها ←
+{{ __('dashboard.manage_all_tickets') }} ←                        
                     </a>
                 @else
                     <a href="{{ route('user.tickets.index') }}" class="text-xs text-indigo-400 hover:text-indigo-300 font-semibold transition-colors">
-                        مشاهده همه تیکت‌های من ←
+{{ __('dashboard.my_tickets') }} ←                        
                     </a>
                 @endif
             </div>
@@ -91,44 +89,42 @@
                 <table class="w-full text-right border-collapse text-xs">
                     <thead>
                         <tr class="bg-slate-900/10 text-slate-400 border-b border-slate-900">
-                            <th class="p-4 font-semibold">موضوع تیکت</th>
-                            <th class="p-4 font-semibold">دپارتمان مربوطه</th>
-                            <th class="p-4 font-semibold">وضعیت سیستم</th>
-                            <th class="p-4 font-semibold text-center">عملیات</th>
+                            <th class="p-4 font-semibold"> {{ __('dashboard.ticket_subject') }}</th>
+                            <th class="p-4 font-semibold"> {{ __('dashboard.department') }}</th>
+                            <th class="p-4 font-semibold"> {{ __('dashboard.status') }}</th>
+                            <th class="p-4 font-semibold text-center">{{ __('dashboard.operation') }}</th>
                         </tr>
                     </thead>
                     <tbody class="divide-y divide-slate-800/30">
                         @forelse($recentTickets as $ticket)
                             <tr class="hover:bg-slate-800/10 transition-colors">
                                 <td class="p-4 font-medium text-slate-200 max-w-xs truncate">{{ $ticket->title }}</td>
-                                <td class="p-4 text-slate-400">{{ $ticket->department->title['fa'] ?? 'بخش نامشخص' }}</td>
+                                <td class="p-4 text-slate-400">{{ $ticket->department->title[app()->getLocale()] ?? $ticket->department->title['fa'] }}</td>
                                 <td class="p-4">
                                     @if($ticket->status === 'new')
-                                        <span class="px-2 py-0.5 rounded-full bg-teal-500/10 text-teal-400 border border-teal-500/20">جدید</span>
+                                        <span class="px-2 py-0.5 rounded-full bg-teal-500/10 text-teal-400 border border-teal-500/20">{{ __('dashboard.new') }}</span>
                                     @elseif($ticket->status === 'pending')
-                                        <span class="px-2 py-0.5 rounded-full bg-amber-500/10 text-amber-400 border border-amber-500/20">در انتظار بررسی</span>
+                                        <span class="px-2 py-0.5 rounded-full bg-amber-500/10 text-amber-400 border border-amber-500/20">{{ __('dashboard.pending') }}  </span>
                                     @elseif($ticket->status === 'answered')
-                                        <span class="px-2 py-0.5 rounded-full bg-emerald-500/10 text-emerald-400 border border-emerald-500/20">پاسخ داده شده</span>
+                                        <span class="px-2 py-0.5 rounded-full bg-emerald-500/10 text-emerald-400 border border-emerald-500/20">  {{ __('dashboard.answered') }}</span>
                                     @else
-                                        <span class="px-2 py-0.5 rounded-full bg-slate-700/20 text-slate-500 border border-slate-700/30">بسته شده</span>
+                                        <span class="px-2 py-0.5 rounded-full bg-slate-700/20 text-slate-500 border border-slate-700/30"> {{ __('dashboard.closed') }}</span>
                                     @endif
                                 </td>
                                 <td class="p-4 text-center">
                                     @if(Auth::user()->role === 'admin' || Auth::user()->is_admin)
                                         <a href="{{ route('admin.tickets.show', $ticket->id) }}" class="inline-flex items-center justify-center bg-indigo-500/10 hover:bg-indigo-500/20 text-indigo-400 font-semibold px-3 py-1 rounded-lg border border-indigo-500/20 transition-all">
-                                            بررسی کارشناس
-                                        </a>
+{{ __('dashboard.review') }}                                        </a>
                                     @else
                                         <a href="{{ route('user.tickets.index') }}" class="inline-flex items-center justify-center bg-slate-800 hover:bg-slate-700 text-slate-300 font-semibold px-3 py-1 rounded-lg transition-all">
-                                            مشاهده گفتگو
-                                        </a>
+{{ __('dashboard.view_conversation') }}                                        </a>
                                     @endif
                                 </td>
                             </tr>
                         @empty
                             <tr>
                                 <td colspan="4" class="p-12 text-center text-slate-500">
-                                    <p class="text-sm">هنوز هیچ درخواست پشتیبانی در سیستم ثبت نشده است.</p>
+                                    <p class="text-sm">  {{ __('dashboard.empty') }}   </p>
                                 </td>
                             </tr>
                         @endforelse

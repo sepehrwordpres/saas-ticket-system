@@ -11,12 +11,18 @@ return Application::configure(basePath: dirname(__DIR__))
         commands: __DIR__.'/../routes/console.php',
         health: '/up',
     )
-   ->withMiddleware(function (Middleware $middleware) {
-    // ثبت الیاس اختصاصی برای میدلور ادمین
-    $middleware->alias([
-        'admin' => \App\Http\Middleware\AdminAccess::class,
-    ]);
-})
+    ->withMiddleware(function (Middleware $middleware) {
+
+        $middleware->alias([
+            'admin' => \App\Http\Middleware\AdminAccess::class,
+        ]);
+
+        // افزودن میدل‌ور تغییر زبان به گروه web (جهت دسترسی کامل به Session)
+        $middleware->web(append: [
+            \App\Http\Middleware\SetLocale::class,
+        ]);
+
+    })
     ->withExceptions(function (Exceptions $exceptions): void {
         $exceptions->shouldRenderJsonWhen(
             fn (Request $request) => $request->is('api/*'),

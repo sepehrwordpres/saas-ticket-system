@@ -1,11 +1,14 @@
 <!DOCTYPE html>
-<html lang="{{ str_replace('_', '-', app()->getLocale()) }}" dir="rtl" class="dark">
-    <head>
+<html lang="{{ str_replace('_', '-', app()->getLocale()) }}"
+      dir="{{ app()->getLocale() === 'fa' ? 'rtl' : 'ltr' }}"
+      class="dark">  
+      
+      <head>
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <meta name="csrf-token" content="{{ csrf_token() }}">
 
-        <title>{{ config('app.name', 'Laravel') }}</title>
+<title>{{ __('app.name') }}</title>
 
         <link rel="preconnect" href="https://fonts.bunny.net">
         <link href="https://fonts.bunny.net/css?family=figtree:400,500,600&display=swap" rel="stylesheet" />
@@ -22,9 +25,9 @@
             {{-- بخش لوگو یا نام سیستم --}}
             <div class="flex flex-col items-center mb-8">
                 <a href="/" class="text-3xl font-black bg-gradient-to-r from-indigo-400 via-purple-400 to-pink-400 bg-clip-text text-transparent drop-shadow-[0_0_15px_rgba(99,102,241,0.2)]">
-                    {{ config('app.name', 'Laravel') }}
+{{ __('app.name') }}                    
                 </a>
-                <p class="text-xs text-slate-400 mt-2">سامانه هوشمند پشتیبانی و مدیریت تیکت</p>
+                <p class="text-xs text-slate-400 mt-2">   {{ __('app.description') }} </p>
             </div>
 
             {{-- باکس فرم‌ها با استایل شیشه‌ای (Glassmorphism) --}}
