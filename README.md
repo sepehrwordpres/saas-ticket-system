@@ -292,24 +292,32 @@ Screenshots of the main application interfaces can be added here.
 
 ### User Dashboard
 
-_Add screenshot here._
+![User Dashboard](screenshots/user%20dashboard.png)
 
 ### Support Agent Panel
 
-_Add screenshot here._
+![Support Dashboard](screenshots/suport%20dashboard.png)
 
 ### Super Admin Panel
 
-_Add screenshot here._
+![Support Dashboard](screenshots/suport%20dashboard.png)
 
 ### Ticket Conversation
 
-_Add screenshot here._
+![Support Chat](screenshots/suport%20chat.png)
 
 ### Department Management
 
-_Add screenshot here._
+![Department Management](screenshots/department-management.png)
 
+## 👥 Expert Management
+
+![Expert Management](screenshots/expert%20management.png)
+
+
+## 🎫 Admin Ticket Conversation
+
+![Admin Ticket Chat](screenshots/ticket-admin-chat.png)
 ---
 
 ## 🛡️ 7. Security Features
