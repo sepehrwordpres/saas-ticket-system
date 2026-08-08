@@ -18,109 +18,55 @@
     </div>
 
     <!-- 🔍 فیلترهای پیشرفته تیکت‌های کاربر -->
-    <div class="glass-card rounded-2xl p-5 shadow-xl border border-slate-800/60 bg-slate-900/20">
-        <form action="{{ route('user.tickets.index') }}" method="GET" class="grid grid-cols-1 md:grid-cols-5 gap-4 items-end text-xs">
+   <div class="glass-card rounded-2xl p-5 shadow-xl border border-slate-800/60 bg-slate-900/20">
+    <form action="{{ route('user.tickets.index') }}" method="GET" class="grid grid-cols-1 md:grid-cols-4 gap-4 items-end text-xs">
+        
+        <!-- جستجوی متنی -->
+        <div class="space-y-2">
+            <label class="text-slate-400 font-medium block">{{ __('tickets.search_tickets') }}</label>
+            <input type="text" name="search" value="{{ request('search') }}" placeholder="{{ __('tickets.search_placeholder') }}" 
+                   class="w-full bg-slate-950/60 border border-slate-800 rounded-xl px-4 py-3 text-slate-200 placeholder-slate-600 focus:outline-none focus:border-blue-500/50 transition-colors">
+        </div>
 
-            <!-- جستجو -->
-            <div class="space-y-2">
-                <label class="text-slate-400 font-medium block">
-                    {{ __('tickets.search_tickets') }}
-                </label>
-                <input 
-                    type="text"
-                    name="search"
-                    value="{{ request('search') }}"
-                    placeholder="{{ __('tickets.search_placeholder') }}"
-                    class="w-full bg-slate-950/60 border border-slate-800 rounded-xl px-4 py-3 text-slate-200 placeholder-slate-600 focus:outline-none focus:border-blue-500/50 transition-colors"
-                >
-            </div>
+        <!-- فیلتر وضعیت -->
+        <div class="space-y-2">
+            <label class="text-slate-400 font-medium block">{{ __('tickets.status') }}</label>
+            <select name="status" class="w-full bg-slate-950/60 border border-slate-800 rounded-xl px-4 py-3 text-slate-300 focus:outline-none focus:border-blue-500/50 transition-colors">
+                <option value="">{{ __('tickets.all_statuses') }}</option>
+                <option value="new" {{ request('status') === 'new' ? 'selected' : '' }}>{{ __('tickets.status_open') }}</option>
+                <option value="pending" {{ request('status') === 'pending' ? 'selected' : '' }}>{{ __('tickets.status_pending') }}</option>
+                <option value="answered" {{ request('status') === 'answered' ? 'selected' : '' }}>{{ __('tickets.status_answered') }}</option>
+                <option value="closed" {{ request('status') === 'closed' ? 'selected' : '' }}>{{ __('tickets.status_closed') }}</option>
+            </select>
+        </div>
 
-            <!-- وضعیت -->
-            <div class="space-y-2">
-                <label class="text-slate-400 font-medium block">
-                    {{ __('tickets.status') }}
-                </label>
-                <select 
-                    name="status"
-                    class="w-full bg-slate-950/60 border border-slate-800 rounded-xl px-4 py-3 text-slate-300 focus:outline-none focus:border-blue-500/50">
-                    <option value="">{{ __('tickets.all_statuses') }}</option>
-                    <option value="new" {{ request('status') == 'new' ? 'selected' : '' }}>
-                        {{ __('tickets.status_open') }}
+        <!-- فیلتر دپارتمان -->
+        <div class="space-y-2">
+            <label class="text-slate-400 font-medium block">{{ __('tickets.department') }}</label>
+            <select name="department_id" class="w-full bg-slate-950/60 border border-slate-800 rounded-xl px-4 py-3 text-slate-300 focus:outline-none focus:border-blue-500/50 transition-colors">
+                <option value="">{{ __('tickets.all_departments') }}</option>
+                @foreach($departments as $dept)
+                    <option value="{{ $dept->id }}" {{ request('department_id') == $dept->id ? 'selected' : '' }}>
+                        {{ is_array($dept->title) ? ($dept->title[app()->getLocale()] ?? $dept->title['fa'] ?? '') : $dept->title }}
                     </option>
-                    <option value="pending" {{ request('status') == 'pending' ? 'selected' : '' }}>
-                        {{ __('tickets.status_pending') }}
-                    </option>
-                    <option value="answered" {{ request('status') == 'answered' ? 'selected' : '' }}>
-                        {{ __('tickets.status_answered') }}
-                    </option>
-                    <option value="closed" {{ request('status') == 'closed' ? 'selected' : '' }}>
-                        {{ __('tickets.status_closed') }}
-                    </option>
-                </select>
-            </div>
+                @endforeach
+            </select>
+        </div>
 
-            <!-- اولویت -->
-            <div class="space-y-2">
-                <label class="text-slate-400 font-medium block">
-                    {{ __('tickets.priority') }}
-                </label>
-                <select 
-                    name="priority"
-                    class="w-full bg-slate-950/60 border border-slate-800 rounded-xl px-4 py-3 text-slate-300 focus:outline-none focus:border-blue-500/50">
-                    <option value="">{{ __('tickets.all_priorities') }}</option>
-                    <option value="low" {{ request('priority') == 'low' ? 'selected' : '' }}>
-                        {{ __('tickets.priority_low') }}
-                    </option>
-                    <option value="medium" {{ request('priority') == 'medium' ? 'selected' : '' }}>
-                        {{ __('tickets.priority_medium') }}
-                    </option>
-                    <option value="high" {{ request('priority') == 'high' ? 'selected' : '' }}>
-                        {{ __('tickets.priority_high') }}
-                    </option>
-                    <option value="critical" {{ request('priority') == 'critical' ? 'selected' : '' }}>
-                        {{ __('tickets.priority_urgent') }}
-                    </option>
-                </select>
-            </div>
+        <!-- دکمه‌های عملیات فیلتر -->
+        <div class="flex gap-2">
+            <button type="submit" class="flex-1 bg-amber-500 hover:bg-amber-600 text-slate-950 font-bold py-3 rounded-xl transition-all shadow-lg shadow-amber-500/10">
+                {{ __('tickets.apply_filter') }}
+            </button>
+            @if(request()->hasAny(['search', 'status', 'department_id']))
+                <a href="{{ route('user.tickets.index') }}" class="bg-slate-800 hover:bg-slate-700 text-slate-300 px-4 py-3 rounded-xl transition-colors flex items-center justify-center font-medium" title="{{ __('tickets.cancel') }}">
+                    {{ __('tickets.cancel') }}
+                </a>
+            @endif
+        </div>
 
-            <!-- دپارتمان -->
-            <div class="space-y-2">
-                <label class="text-slate-400 font-medium block">
-                    {{ __('tickets.department') }}
-                </label>
-                <select 
-                    name="department_id"
-                    class="w-full bg-slate-950/60 border border-slate-800 rounded-xl px-4 py-3 text-slate-300 focus:outline-none focus:border-blue-500/50">
-                    <option value="">{{ __('tickets.all_departments') }}</option>
-                    @foreach($departments as $dept)
-                        <option 
-                            value="{{ $dept->id }}"
-                            {{ request('department_id') == $dept->id ? 'selected' : '' }}>
-                            {{ $dept->title[app()->getLocale()] ?? $dept->title['fa'] ?? __('tickets.unknown_department') }}
-                        </option>
-                    @endforeach
-                </select>
-            </div>
-
-            <!-- دکمه‌ها -->
-            <div class="flex gap-2">
-                <button 
-                    type="submit"
-                    class="flex-1 bg-blue-500 hover:bg-blue-600 text-white font-bold py-3 rounded-xl transition-all shadow-lg shadow-blue-500/10">
-                    {{ __('tickets.apply_filter') }}
-                </button>
-
-                @if(request()->hasAny(['search','status','priority','department_id']))
-                    <a 
-                        href="{{ route('user.tickets.index') }}"
-                        class="bg-slate-800 hover:bg-slate-700 text-slate-300 px-4 py-3 rounded-xl transition-colors flex items-center">
-                        {{ __('tickets.cancel') }}
-                    </a>
-                @endif
-            </div>
-
-        </form>
-    </div>
+    </form>
+</div>
 
     <!-- جدول تیکت‌ها -->
     <div class="glass-card rounded-2xl overflow-hidden shadow-2xl">
